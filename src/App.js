@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import 'primeflex/primeflex.min.css'
+import 'primeicons/primeicons.css'
+import 'primeflex/primeflex.css'
+import 'primereact/resources/themes/lara-light-purple/theme.css'
+import 'primereact/resources/primereact.css'
+import PrimeReact from 'primereact/api'
 
-function App() {
+import React from 'react';
+import { AuthProvider } from './Auth';
+import Main from './Components/Main'
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Main />
+    </AuthProvider>
   );
 }
 
