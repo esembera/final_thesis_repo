@@ -12,7 +12,7 @@ const Home = () => {
     const login = <button onClick={() => history.push('/login')}> Prijavi se</button>
     const logout = <button onClick={() => app.auth().signOut()}> Odjavi se</button>
 
-    console.log(currentUser.currentUser)
+    //console.log(currentUser.currentUser)
 
     return (
         <div>

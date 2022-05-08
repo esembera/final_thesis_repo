@@ -8,6 +8,7 @@ import {InputText} from 'primereact/inputtext'
 import {classNames} from 'primereact/utils'
 import {Button} from 'primereact/button'
 import 'primeflex/primeflex.css'
+import '../auth.css'
 
 
 const Login = () => {
