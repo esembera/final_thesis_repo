@@ -4,14 +4,13 @@ import 'primeflex/primeflex.css'
 import 'primereact/resources/themes/lara-light-purple/theme.css'
 import 'primereact/resources/primereact.css'
 import {Menubar} from 'primereact/menubar'
-import PrimeReact from 'primereact/api'
 
 import React, {useContext} from 'react';
-import { AuthProvider } from './Auth';
 import Main from './Components/Main'
 import { AuthContext } from './Auth'
 import { useHistory } from "react-router-dom";
 import app from './base'
+import { Button } from 'primereact/button'
 
 
 const App = () => {
@@ -32,10 +31,10 @@ const App = () => {
 			icon: 'pi pi-book',
 			items: [
 				{
-					label: 'Dodaj novi oglas',
+					label: 'Učenje brojeva',
 					icon: 'pi pi-plus',
 					command: () => {
-						navigateToPage('/new-ad')
+						navigateToPage('/game-1')
 					}
 				},
 				{
@@ -79,8 +78,15 @@ const App = () => {
   const currentUser = useContext(AuthContext);
   console.log(currentUser)
 
-  const login = <button onClick={() => history.push('/login')}> Prijavi se</button>
-  const logout = <button onClick={() => app.auth().signOut()}> Odjavi se</button>
+  const login = <span>
+    <Button label="Registracija" className="p-button-raised p-button-danger p-button-rounded mr-1"
+			onClick={() => history.push('/register')}/>
+    <Button label="Prijava" className="p-button-raised p-button-rounded " onClick={() => history.push('/login')}/>
+  </span>
+
+const logout = <span className="flex flex-row">
+<Button label="Odjavi se" className="p-button-raised p-button-rounded" onClick={() => app.auth().signOut()}/>
+				</span>
 
 
   return (

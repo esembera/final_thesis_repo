@@ -44,9 +44,9 @@ const Register = () => {
     return (
         <div className="flex justify-content-center m-4">
                 <Card className="card-container" title="Registrirajte se">
-                    <form onSubmit={handleSubmit(onSignUp)} className="grid p-grid p-formgrid form-layout">
+                    <form onSubmit={handleSubmit(onSignUp)} className="grid p-fluid p-formgrid form-layout">
                         
-                        <div className="p-field col-12 flex justify-content-center">
+                        <div className="p-field col-12">
                             <span className="p-float-label">
                                 <Controller name="email" control={control}
                                     rules={{required: 'E-mail je obavezan.'}}
@@ -55,11 +55,11 @@ const Register = () => {
                                         className={classNames({'p-invalid': fieldState.invalid})} type="text"/>
                                         )}/>
                                         <label htmlFor="email" className={classNames({'p-error': errors.email})}>E-mail*</label>
-                                        {getFormErrorMessage('email')}
                             </span>
+                            {getFormErrorMessage('email')}
                         </div>
 
-                        <div className="p-field col-12 flex justify-content-center">
+                        <div className="p-field col-12">
                             <span className="p-float-label mt-2">
                                     <Controller name="password" control={control} rules={{required: 'Zaporka je obavezna.'}}
                                                 render={({field, fieldState}) => (

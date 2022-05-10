@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useState} from "react";
 import app from '../../../base';
 import { useHistory } from "react-router-dom";
 import {Password} from 'primereact/password'
@@ -44,9 +44,9 @@ const Login = () => {
     return (
         <div className="flex justify-content-center m-4">
                 <Card className="card-container" title="Prijavite se">
-                    <form onSubmit={handleSubmit(onLogin)} className="grid p-grid p-formgrid form-layout">
+                    <form onSubmit={handleSubmit(onLogin)} className="grid p-fluid p-formgrid form-layout">
                         
-                        <div className="p-field col-12 flex justify-content-center">
+                        <div className="p-field col-12">
                             <span className="p-float-label">
                                 <Controller name="email" control={control}
                                     rules={{required: 'E-mail je obavezan.'}}
@@ -55,22 +55,22 @@ const Login = () => {
                                         className={classNames({'p-invalid': fieldState.invalid})} type="text"/>
                                         )}/>
                                         <label htmlFor="email" className={classNames({'p-error': errors.email})}>E-mail*</label>
-                                        {getFormErrorMessage('email')}
                             </span>
+                            {getFormErrorMessage('email')}
                         </div>
 
-                        <div className="p-field col-12 flex justify-content-center">
+                        <div className="p-field col-12">
                             <span className="p-float-label mt-2">
                                     <Controller name="password" control={control} rules={{required: 'Zaporka je obavezna.'}}
                                                 render={({field, fieldState}) => (
                                                     <Password id={field.name} {...field} toggleMask
-                                                            className={classNames({'p-invalid': fieldState.invalid})}
-                                                            feedback={false}
+                                                    className={classNames({'p-invalid': fieldState.invalid})}
+                                                    feedback={false}
                                                     />
-                                                )}/>
+                                                    )}/>
                                     <label htmlFor="password" className={classNames({'p-error': errors.password})}>Zaporka*</label>
                                 </span>
-                                        {getFormErrorMessage('password')}
+                            {getFormErrorMessage('password')}
 					    </div>
 
 
@@ -81,7 +81,7 @@ const Login = () => {
                             </div>
 					    </div>
 
-                        <div className="col-12 flex justify-content-center mt-2">
+                        <div className="col-12 flex justify-content-center mt-2 pb-0 mb-0">
                             <div>
                                 Nemate profil? <b style={{cursor: 'pointer', textDecoration: 'underline'}} onClick={() => history.push('/register')}>Registrirajte se!</b>
                             </div>
