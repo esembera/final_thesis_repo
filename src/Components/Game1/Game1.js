@@ -1,6 +1,7 @@
 import { Button } from "primereact/button";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import './Game1.css'
 
 
 const shapes = [
@@ -16,11 +17,18 @@ const shapes = [
     'cookie'
 ]
 
+const numbers = ["0",1,2,3,4,5,6,7,8,9]
+
 const Game1 = () => {
 
     const [currentShapes, setCurrentShapes] = useState([])
     const [currentNoShapes, setCurrentNoShapes] = useState({})
     const [wantedShape, setWantedShape] = useState('')
+    const [selectedValue, setSelectedValue] = useState(null)
+    const [outcome, setOutcome] = useState(null)
+    const [isClicked, setIsClicked] = useState(false)
+    const [timesRendered, setTimesRendered] = useState(0)
+
 
     
     const createBoard = () => {
@@ -54,12 +62,30 @@ const Game1 = () => {
         randomShapeYoureLookingFor();
     }, [])
 
+    useEffect(() => {
+        verifyChoice();
+        setTimesRendered(timesRendered + 1)
+    }, [selectedValue])
 
-    console.log(currentShapes, currentNoShapes);
+    const verifyChoice = () => {
+        if(timesRendered >= 1){
+            setIsClicked(true);
+            if(selectedValue == currentNoShapes[wantedShape] || (selectedValue == "0" && currentNoShapes[wantedShape] == undefined)){
+                setOutcome(true);
+            }else{
+                setOutcome(false);
+                
+            }
+        }
+    }
+
+    const success = <span><h1>Bravo!</h1></span>
+    const fail = <span><h1>Nažalost krivo, pokušaj ponovo!</h1></span>
 
     return (
+        <div>
+        <h1> Koliko oblika {wantedShape} ima na ekranu?</h1>
         <div className="app">
-            <h1> Koliko oblika {wantedShape} ima na ekranu?</h1>
             <div className="game">
 
                 {currentShapes.map((shape, index) => (
@@ -69,8 +95,16 @@ const Game1 = () => {
                     />
                     
                 ))}
-
             </div>
+            <div>
+                {numbers.map((number)=> (
+                    <div className="buttonDiv">
+                    <Button label={number} onClick={() => setSelectedValue(number)}/>
+                    </div>
+                    ))}
+            </div>
+            {!!isClicked ? (outcome ? success : fail) : null}
+        </div>
         </div>
     )
 

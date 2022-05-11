@@ -1,11 +1,11 @@
 .app{
-    display: flex;
+    /*display: flex;*/
     padding: 30px;
 }
 
 .game{
-    width: 1050px;
-    height: 1050px;
+    /*width: 1050px;
+    height: 1050px;*/
     display: flex;
     flex-wrap: wrap;
 }
@@ -13,4 +13,9 @@
 .game img{
     width: 70px;
     height: 70px;
+}
+
+.buttonDiv{
+    display: inline;
+    margin: 10px;
 }
