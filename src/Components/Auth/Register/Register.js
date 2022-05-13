@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useState} from "react";
 import app from '../../../base';
 import { useHistory } from "react-router-dom";
 import {Password} from 'primereact/password'
@@ -34,7 +34,7 @@ const Register = () => {
 	}
 
 
-    const {control, formState: {errors}, handleSubmit, setError, reset} = useForm({defaultValues});
+    const {control, formState: {errors}, handleSubmit} = useForm({defaultValues});
 
     const getFormErrorMessage = (name) => {
 		return errors[name] && <small className="p-error">{errors[name].message}</small>

@@ -34,7 +34,7 @@ const Login = () => {
 	}
 
 
-    const {control, formState: {errors}, handleSubmit, setError, reset} = useForm({defaultValues});
+    const {control, formState: {errors}, handleSubmit} = useForm({defaultValues});
 
     const getFormErrorMessage = (name) => {
 		return errors[name] && <small className="p-error">{errors[name].message}</small>
