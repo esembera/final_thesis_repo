@@ -1,8 +1,6 @@
 import { Button } from "primereact/button";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Auth";
-import './Game1.css'
-
 
 
 const shapes = [
@@ -20,7 +18,7 @@ const shapes = [
 
 const numbers = ["0",1,2,3,4,5,6,7,8,9]
 
-const Game1 = () => {
+const Game2 = () => {
     
     const [currentShapes, setCurrentShapes] = useState([])
     const [currentNoShapes, setCurrentNoShapes] = useState({})
@@ -148,4 +146,4 @@ const Game1 = () => {
 
 }
 
-export default Game1;
+export default Game2;

@@ -42,10 +42,10 @@ const App = () => {
 					icon: 'pi pi-bars',
 					items: [
 						{
-							label: 'Oglasi za alat',
+							label: 'Usporedba brojeva',
 							icon: 'pi pi-briefcase',
 							command: () => {
-								navigateToPage('/advert')
+								navigateToPage('/game-2')
 							}
 						},
 						{
