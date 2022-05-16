@@ -4,8 +4,9 @@ import 'primeflex/primeflex.css'
 import 'primereact/resources/themes/lara-light-purple/theme.css'
 import 'primereact/resources/primereact.css'
 import {Menubar} from 'primereact/menubar'
-
-import React, {useContext} from 'react';
+import { ToastContext } from './Toast'
+import { Toast } from 'primereact/toast'
+import React, {useContext, useRef} from 'react';
 import Main from './Components/Main'
 import { AuthContext } from './Auth'
 import { useHistory } from "react-router-dom";
@@ -16,6 +17,8 @@ import { Button } from 'primereact/button'
 const App = () => {
 
   const history = useHistory();
+
+  const toastRef = useRef(null);
 
 
   const menuItems = [
@@ -90,10 +93,13 @@ const logout = <span className="flex flex-row">
 
 
   return (
-      <div className="m-2">
-                  <Menubar className="mb-3" model={[...menuItems]} start={start} end={!!currentUser?.currentUser ? logout : login}/>
-        <Main />
-      </div>
+	  <ToastContext.Provider value={{toastRef}}>
+		<Toast ref={toastRef}/>
+		<div className="m-2">
+					<Menubar className="mb-3" model={[...menuItems]} start={start} end={!!currentUser?.currentUser ? logout : login}/>
+			<Main />
+		</div>
+	  </ToastContext.Provider>
   );
 }
 
