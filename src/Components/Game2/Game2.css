@@ -21,5 +21,13 @@
 }
 
 .numberButton{
-    width: 61px;
+    height: '85px';
+    width: '65px';
+    color: 'white';
+    text-align: 'center';
+    font-size: '1rem';
+    line-height: 'normal';
+    float: 'left';
+    border-radius: '5px';
+    margin: '1.5rem auto'
 }

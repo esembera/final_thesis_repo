@@ -18,7 +18,7 @@ const shapes = [
     'cookie'
 ]
 
-const numbers = ["0",1,2,3,4,5,6,7,8,9]
+const numbers = ["0",1,2,3,4,5,6,7,8,9,10]
 
 const Game1 = () => {
     
@@ -108,25 +108,25 @@ const Game1 = () => {
 
     const enable = numbers.map((number)=> (
                     <div className="buttonDiv">
-                    <Button label={number} onClick={() => setSelectedValue(number)}/>
+                    <Button className="numberButton" label={number} onClick={() => setSelectedValue(number)}/>
                     </div>))
     const disable = numbers.map((number)=> (
                     <div className="buttonDiv">
-                    <Button label={number} disable/>
+                    <Button className="numberButton" label={number} disable/>
                     </div>))
 
     console.log(isDisabled)
 
     return (
-        <div className="flex flex-wrap justify-content-center">
+        <div>
             <div className="absolute right-0 pr-3 text-primary font-medium">
                 Trenutni niz: {currentStreak}
             </div>
-            <div>
+            <div className="flex justify-content-center block">
                 <h1> Koliko oblika {wantedShape} ima na ekranu?</h1>
             </div>
-        <div className="flex justify-content-center">
-            <div className="justify-content-center w-8">
+        <div className="flex justify-content-center align-content-center">
+            <div className="flex flex-wrap justify-content-center w-3">
 
                 {currentShapes.map((shape, index) => (
                     <img

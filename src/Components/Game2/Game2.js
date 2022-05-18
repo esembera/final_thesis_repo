@@ -1,6 +1,13 @@
 import { Button } from "primereact/button";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Auth";
+import './Game2.css'
+import { Card } from "primereact/card";
+import { Container } from "./Container";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { Dustbin } from "./Dustbin";
+import { Box } from "./Box";
 
 
 const shapes = [
@@ -16,131 +23,152 @@ const shapes = [
     'cookie'
 ]
 
-const numbers = ["0",1,2,3,4,5,6,7,8,9]
 
+const options = [
+    {
+        id: 1,
+        value: '>'
+    },
+    {
+        id: 2,
+        value: '<'
+    },
+    {
+        id: 3,
+        value: '='
+    }
+]
 const Game2 = () => {
     
-    const [currentShapes, setCurrentShapes] = useState([])
-    const [currentNoShapes, setCurrentNoShapes] = useState({})
-    const [wantedShape, setWantedShape] = useState('')
+
+    const [currentShapes1, setCurrentShapes1] = useState([])
+    const [currentShapes2, setCurrentShapes2] = useState([])
+    const [selectedShape1, setSelectedShape1] = useState('')
+    const [selectedShape2, setSelectedShape2] = useState('')
     const [selectedValue, setSelectedValue] = useState(null)
     const [outcome, setOutcome] = useState(null)
     const [isClicked, setIsClicked] = useState(false)
     const [timesRendered, setTimesRendered] = useState(0)
-    const [isDisabled, setIsDisabled] = useState(false)
     const [currentStreak, setCurrentStreak] = useState(0)
     const [refreshPage, setRefreshPage] = useState(0)
     
-    let initialNumberOfShapes = 20;
     
     const currentUser = useContext(AuthContext);
     
     const createBoard = () => {
-        const randomShapes = [];
-        var noShapes = {}
-        for (let i=0; i<initialNumberOfShapes; i++){
-            const randomShape = shapes[Math.floor(Math.random()*shapes.length)];
-            if(!noShapes[randomShape]){
-                noShapes[randomShape] = 1;
-                randomShapes.push(randomShape);
-            }else if(noShapes[randomShape] < 10){
-                noShapes[randomShape] += 1;
-                randomShapes.push(randomShape);
-            }else{
-                initialNumberOfShapes +=1;
-            }
+        const shapes1 = [];
+        const shapes2 = [];
+        var noShapes = {};
+        const randomShape1 = shapes[Math.floor(Math.random()*shapes.length)];
+        const randomShape2 = shapes[Math.floor(Math.random()*shapes.length)];
+        const noShapes1 = Math.floor(Math.random() * 9 + 1);
+        const noShapes2 = Math.floor(Math.random() * 9 + 1);
+        noShapes[randomShape1]=noShapes1;
+        noShapes[randomShape2]=noShapes2;
+        for (let i=0; i<noShapes1; i++){
+            shapes1.push(randomShape1);
         }
-
-        setCurrentShapes(randomShapes);
-        setCurrentNoShapes(noShapes)
+        for (let i=0; i<noShapes2; i++){
+            shapes2.push(randomShape2);
+        }
+        setSelectedShape1(randomShape1);
+        setSelectedShape2(randomShape2);
+        setCurrentShapes1(shapes1);
+        setCurrentShapes2(shapes2);
     }
 
-    const randomShapeYoureLookingFor = () => {
-        const shapeYoureLookingFor = shapes[Math.floor(Math.random()*shapes.length)];
-        setWantedShape(shapeYoureLookingFor)
-    }
 
     useEffect(() => {
         createBoard();
-        randomShapeYoureLookingFor();
         const streak = JSON.parse(localStorage.getItem(`${currentUser.currentUser?.multiFactor?.user?.email}:game1Streak`))
         if(streak){
             setCurrentStreak(streak)
         }
     }, [refreshPage])
 
-    useEffect(() => {
-        verifyChoice();
-        setTimesRendered(timesRendered + 1)
-    }, [selectedValue])
+    // useEffect(() => {
+    //     verifyChoice();
+    //     setTimesRendered(timesRendered + 1)
+    // }, [selectedValue])
 
     useEffect(() => {
         localStorage.setItem(`${currentUser.currentUser?.multiFactor?.user?.email}:game1Streak`, JSON.stringify(currentStreak))
     }, [currentStreak])
 
-    const verifyChoice = () => {
-        if(timesRendered >= 1){
-            setIsClicked(true);
-            if(selectedValue === currentNoShapes[wantedShape] || (selectedValue === "0" && currentNoShapes[wantedShape] === undefined)){
-                setOutcome(true);
-                setIsDisabled(true);
-                setCurrentStreak(currentStreak + 1);
-            }else{
-                setOutcome(false);
-                setCurrentStreak(0);                
-            }
-        }
-    }
+    // const verifyChoice = () => {
+    //     if(timesRendered >= 1){
+    //         setIsClicked(true);
+    //         if(selectedValue === currentNoShapes[wantedShape] || (selectedValue === "0" && currentNoShapes[wantedShape] === undefined)){
+    //             setOutcome(true);
+    //             setCurrentStreak(currentStreak + 1);
+    //         }else{
+    //             setOutcome(false);
+    //             setCurrentStreak(0);                
+    //         }
+    //     }
+    // }
 
     const refreshPageAndSaveProgress = () => {
-        setIsDisabled(false);
         setIsClicked(false);
         setSelectedValue(null);
         setTimesRendered(0);
         setRefreshPage(refreshPage + 1);
     }
 
-    const success = <div className=""><h1 className="text-center">Bravo!</h1><Button label="Klikni me kada si spreman za novi krug!" onClick={() => refreshPageAndSaveProgress()}/></div>
-    const fail = <h1>Nažalost krivo, pokušaj ponovo!</h1>
 
-
-    const enable = numbers.map((number)=> (
-                    <div className="buttonDiv">
-                    <Button label={number} onClick={() => setSelectedValue(number)}/>
-                    </div>))
-    const disable = numbers.map((number)=> (
-                    <div className="buttonDiv">
-                    <Button label={number} disable/>
-                    </div>))
-
-    console.log(isDisabled)
 
     return (
-        <div className="flex flex-wrap justify-content-center">
-            <div className="absolute right-0 pr-3 text-primary font-medium">
-                Trenutni niz: {currentStreak}
-            </div>
-            <div>
-                <h1> Koliko oblika {wantedShape} ima na ekranu?</h1>
-            </div>
-        <div className="flex justify-content-center">
-            <div className="justify-content-center w-8">
+        <div>
+                <div className="absolute right-0 pr-3 text-primary font-medium">
+                    Trenutni niz: {currentStreak}
+                </div>
+                <div className="flex justify-content-center block">
+                    <h1> Ima li na ekranu više {selectedShape1} ili {selectedShape2} ?</h1>
+                </div>
+                <div className="grid">
+                    <div className="col-5">
 
-                {currentShapes.map((shape, index) => (
-                    <img
-                    key={index}
-                    alt={shape}
-                    />
+                        {currentShapes1.map((shape, index) => (
+                            <img
+                            key={index}
+                            alt={shape}
+                            />
+                            
+                        ))}
+                    </div>
+
+                    <div className="col-2 justify-content-center">
+                        <DndProvider backend={HTML5Backend}>
+                            <div>
+                            <Dustbin/>
+                            </div>
+
+
+                            <div style={{overflow: 'hidden', clear: 'both'}}>
+
+                               {options.map((value) => (
+                                   <Box title={value.value} key={value.id}/>
+                                ))}
+
+                            </div>
+
+                        </DndProvider>
+                    </div>
                     
-                ))}
-            </div>
-        </div>
-        <div className="flex justify-content-center w-full">
-            {isDisabled ? disable : enable}
-        </div>
-        <div className="flex justify-content-center">
-            {!!isClicked ? (outcome ? success : fail) : null}        
-        </div>
+                    <div className="col-5">
+                        {currentShapes2.map((shape, index) => (
+                                <img
+                                key={index}
+                                alt={shape}
+                                />
+                                
+                            ))}
+
+                    </div>
+                </div>
+                <div className="flex justify-content-center">
+                    {!!isClicked ? (outcome ? success : fail) : null}        
+                </div>
         </div>
     )
 
