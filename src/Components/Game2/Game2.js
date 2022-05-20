@@ -1,13 +1,12 @@
-import { Button } from "primereact/button";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Auth";
 import './Game2.css'
-import { Card } from "primereact/card";
-import { Container } from "./Container";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { Dustbin } from "./Dustbin";
-import { Box } from "./Box";
+import Picture from "./Picture";
+import equal from '../../assets/images/equal.png';
+import less_than from '../../assets/images/less_than.png';
+import more_than from '../../assets/images/more_than.png';
+import { useDrop } from "react-dnd";
+import { Button } from "primereact/button";
 
 
 const shapes = [
@@ -24,18 +23,18 @@ const shapes = [
 ]
 
 
-const options = [
+const PictureList = [
     {
         id: 1,
-        value: '>'
+        src: equal
     },
     {
         id: 2,
-        value: '<'
+        src: less_than
     },
     {
         id: 3,
-        value: '='
+        src: more_than
     }
 ]
 const Game2 = () => {
@@ -45,26 +44,28 @@ const Game2 = () => {
     const [currentShapes2, setCurrentShapes2] = useState([])
     const [selectedShape1, setSelectedShape1] = useState('')
     const [selectedShape2, setSelectedShape2] = useState('')
-    const [selectedValue, setSelectedValue] = useState(null)
+    const [selectedValue, setSelectedValue] = useState([])
+    const [selectedId, setSelectedId] = useState(0)
     const [outcome, setOutcome] = useState(null)
     const [isClicked, setIsClicked] = useState(false)
     const [timesRendered, setTimesRendered] = useState(0)
     const [currentStreak, setCurrentStreak] = useState(0)
     const [refreshPage, setRefreshPage] = useState(0)
-    
-    
-    const currentUser = useContext(AuthContext);
-    
+    const [noShapes1, setNoShapes1] = useState(0)
+    const [noShapes2, setNoShapes2] = useState(0)
+    const [failed, setFailed] = useState(0);
+
+
+
     const createBoard = () => {
         const shapes1 = [];
         const shapes2 = [];
-        var noShapes = {};
         const randomShape1 = shapes[Math.floor(Math.random()*shapes.length)];
         const randomShape2 = shapes[Math.floor(Math.random()*shapes.length)];
         const noShapes1 = Math.floor(Math.random() * 9 + 1);
         const noShapes2 = Math.floor(Math.random() * 9 + 1);
-        noShapes[randomShape1]=noShapes1;
-        noShapes[randomShape2]=noShapes2;
+        setNoShapes1(noShapes1);
+        setNoShapes2(noShapes2);
         for (let i=0; i<noShapes1; i++){
             shapes1.push(randomShape1);
         }
@@ -77,44 +78,86 @@ const Game2 = () => {
         setCurrentShapes2(shapes2);
     }
 
+    const [{isOver}, drop] = useDrop(() => ({
+        accept: 'image',
+        drop: (item) => addImageToBoard(item.id),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver(),
+        }),
+    }));
+
+    const addImageToBoard = (id) => {
+        const pictureList = PictureList.filter((picture) => id === picture.id);
+        setSelectedValue(pictureList[0]) 
+        setSelectedId(id);
+    };
+    
+    
+    const currentUser = useContext(AuthContext);
+
+    useEffect(()=> {
+        verifyChoice()
+        setTimesRendered(timesRendered + 1)
+    }, [isOver])
+    
+
 
     useEffect(() => {
         createBoard();
-        const streak = JSON.parse(localStorage.getItem(`${currentUser.currentUser?.multiFactor?.user?.email}:game1Streak`))
+        const streak = JSON.parse(localStorage.getItem(`${currentUser.currentUser?.multiFactor?.user?.email}:game2Streak`))
         if(streak){
             setCurrentStreak(streak)
         }
     }, [refreshPage])
 
-    // useEffect(() => {
-    //     verifyChoice();
-    //     setTimesRendered(timesRendered + 1)
-    // }, [selectedValue])
 
-    useEffect(() => {
-        localStorage.setItem(`${currentUser.currentUser?.multiFactor?.user?.email}:game1Streak`, JSON.stringify(currentStreak))
-    }, [currentStreak])
+    const resetProgress = () => {
+        var streak = JSON.parse(localStorage.getItem(`${currentUser.currentUser?.multiFactor?.user?.email}:game2Streak`));
+        streak = 0;
+        localStorage.setItem(`${currentUser.currentUser?.multiFactor?.user?.email}:game2Streak`, JSON.stringify(streak));
+        setFailed(0)
 
-    // const verifyChoice = () => {
-    //     if(timesRendered >= 1){
-    //         setIsClicked(true);
-    //         if(selectedValue === currentNoShapes[wantedShape] || (selectedValue === "0" && currentNoShapes[wantedShape] === undefined)){
-    //             setOutcome(true);
-    //             setCurrentStreak(currentStreak + 1);
-    //         }else{
-    //             setOutcome(false);
-    //             setCurrentStreak(0);                
-    //         }
-    //     }
-    // }
+    }
+
+
+    const verifyChoice = () => {
+        if(timesRendered >= 1){
+            setIsClicked(true);
+            if(selectedId === 1 && noShapes1 == noShapes2){
+                setOutcome(true);
+            }else if(selectedId === 2 && noShapes1 < noShapes2){
+                setOutcome(true);
+            }else if(selectedId === 3 && noShapes1 > noShapes2){
+                setOutcome(true);
+            }else{
+                setOutcome(false);
+                setFailed(failed + 1);
+                if(failed === 2){
+                    resetProgress()
+                }
+            }
+        }
+    }
+
+    const saveProgress = () => {
+        var streak = JSON.parse(localStorage.getItem(`${currentUser.currentUser?.multiFactor?.user?.email}:game2Streak`));
+        streak = streak + 1;
+        setCurrentStreak(streak);
+        console.log(streak, currentStreak)
+        localStorage.setItem(`${currentUser.currentUser?.multiFactor?.user?.email}:game2Streak`, JSON.stringify(streak));
+    }
 
     const refreshPageAndSaveProgress = () => {
+        saveProgress();
         setIsClicked(false);
         setSelectedValue(null);
         setTimesRendered(0);
         setRefreshPage(refreshPage + 1);
     }
 
+
+    const success = <div className=""><h1 className="text-center">Bravo!</h1><Button label="Klikni me kada si spreman za novi krug!" onClick={() => refreshPageAndSaveProgress()}/></div>
+    const fail = <h1>Nažalost krivo, pokušaj ponovo!</h1>
 
 
     return (
@@ -138,21 +181,19 @@ const Game2 = () => {
                     </div>
 
                     <div className="col-2 justify-content-center">
-                        <DndProvider backend={HTML5Backend}>
-                            <div>
-                            <Dustbin/>
+                            <div className="board" ref={drop}>
+                                    <Picture style={"one"} src={selectedValue?.src} id={selectedValue?.id} />
                             </div>
 
 
-                            <div style={{overflow: 'hidden', clear: 'both'}}>
+                            <div className="pictures">
 
-                               {options.map((value) => (
-                                   <Box title={value.value} key={value.id}/>
+                               {PictureList.map((picture) => (
+                                   <Picture style={"many"} src={picture.src} id={picture.id} key={picture.id}/>
                                 ))}
 
                             </div>
 
-                        </DndProvider>
                     </div>
                     
                     <div className="col-5">

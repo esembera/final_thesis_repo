@@ -8,6 +8,7 @@ import Game1 from './Game1/Game1';
 import Game2 from './Game2/Game2';
 import PublicRoute from './Routes/PublicRoute';
 import PrivateRoute from './Routes/PrivateRoute';
+import Game3 from './Game3/Game3';
 
 
 const Main = () => (
@@ -19,6 +20,7 @@ const Main = () => (
         <PublicRoute exact path ="/register" component={Register}/>
         <PrivateRoute exact path ="/game-1" component={Game1}/>
         <PrivateRoute exact path ="/game-2" component={Game2}/>
+        <PrivateRoute exact path ="/game-3" component={Game3}/>
         <PublicRoute component={Error404} />
     </Switch>
 </main>

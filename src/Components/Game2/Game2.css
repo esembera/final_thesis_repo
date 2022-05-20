@@ -10,24 +10,30 @@
     flex-wrap: wrap;
 }
 
-.game img{
-    width: 70px;
-    height: 70px;
+.board{
+    border: 2px solid black;
+    width: 200px;
+    height: 100px;
+    margin: 0 auto;
+    align-items: center;
 }
 
-.buttonDiv{
-    display: inline;
-    margin: 10px;
+.pictures{
+    overflow: hidden;
+    clear: both;
+    margin: 0 auto;
 }
 
-.numberButton{
-    height: '85px';
-    width: '65px';
-    color: 'white';
-    text-align: 'center';
-    font-size: '1rem';
-    line-height: 'normal';
-    float: 'left';
-    border-radius: '5px';
-    margin: '1.5rem auto'
+.many{
+    width: 30%;
+    margin: 5px 3px; 
+    display:'inline-block';
+}
+
+.one{
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3px;
 }

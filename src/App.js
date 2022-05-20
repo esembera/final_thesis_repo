@@ -34,33 +34,26 @@ const App = () => {
 			icon: 'pi pi-book',
 			items: [
 				{
-					label: 'Učenje brojeva',
-					icon: 'pi pi-plus',
+					label: 'Brojalica',
+					icon: 'pi pi-hashtag',
 					command: () => {
 						navigateToPage('/game-1')
 					}
 				},
 				{
-					label: 'Pregledaj oglase',
-					icon: 'pi pi-bars',
-					items: [
-						{
-							label: 'Usporedba brojeva',
-							icon: 'pi pi-briefcase',
-							command: () => {
-								navigateToPage('/game-2')
-							}
-						},
-						{
-							label: 'Oglasi za zahtjeve',
-							icon: 'pi pi-bookmark',
-							command: () => {
-								navigateToPage('/req')
-							}
-						}
-					]
-					
-				}
+					label: 'Odnosi među brojevima',
+					icon: 'pi pi-sort-numeric-down',
+					command: () => {
+						navigateToPage('/game-2')
+					}
+				},
+				{
+					label: 'Zbrajalica',
+					icon: 'pi pi-plus',
+					command: () => {
+						navigateToPage('/game-3')
+					}
+				},
 			]
 		}
 	];
