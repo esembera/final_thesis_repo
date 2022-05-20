@@ -2,17 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Auth";
 import './Game2.css'
 import Picture from "./Picture";
-import equal from '../../assets/images/equal.png';
-import less_than from '../../assets/images/less_than.png';
-import more_than from '../../assets/images/more_than.png';
+import equal from '../../assets/images/signs/equal.png';
+import less_than from '../../assets/images/signs/less_than.png';
+import more_than from '../../assets/images/signs/more_than.png';
 import { useDrop } from "react-dnd";
 import { Button } from "primereact/button";
+import Shape from "../Shared/Shape";
 
 
 const shapes = [
-    'green-apple',
-    'red-apple',
-    'bannana',
+    'green_apple',
+    'red_apple',
+    'banana',
     'pear',
     'car',
     'tree',
@@ -132,7 +133,7 @@ const Game2 = () => {
             }else{
                 setOutcome(false);
                 setFailed(failed + 1);
-                if(failed === 2){
+                if(failed === 3){
                     resetProgress()
                 }
             }
@@ -155,7 +156,6 @@ const Game2 = () => {
         setRefreshPage(refreshPage + 1);
     }
 
-
     const success = <div className=""><h1 className="text-center">Bravo!</h1><Button label="Klikni me kada si spreman za novi krug!" onClick={() => refreshPageAndSaveProgress()}/></div>
     const fail = <h1>Nažalost krivo, pokušaj ponovo!</h1>
 
@@ -166,16 +166,14 @@ const Game2 = () => {
                     Trenutni niz: {currentStreak}
                 </div>
                 <div className="flex justify-content-center block">
-                    <h1> Ima li na ekranu više {selectedShape1} ili {selectedShape2} ?</h1>
+                    <h1> Ima li na ekranu više <Shape klasa="titleShape" name={selectedShape1}/> ili <Shape klasa="titleShape" name={selectedShape2}/> ?</h1>
                 </div>
                 <div className="grid">
                     <div className="col-5">
 
                         {currentShapes1.map((shape, index) => (
-                            <img
-                            key={index}
-                            alt={shape}
-                            />
+
+                            <Shape name={shape} key={index} klasa="shape--game2"/>
                             
                         ))}
                     </div>
@@ -198,10 +196,7 @@ const Game2 = () => {
                     
                     <div className="col-5">
                         {currentShapes2.map((shape, index) => (
-                                <img
-                                key={index}
-                                alt={shape}
-                                />
+                                <Shape name={shape} key={index} klasa="shape--game2"/>
                                 
                             ))}
 

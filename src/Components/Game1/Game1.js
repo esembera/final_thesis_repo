@@ -2,13 +2,14 @@ import { Button } from "primereact/button";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Auth";
 import './Game1.css'
+import Shape from "../Shared/Shape";
 
 
 
 const shapes = [
-    'green-apple',
-    'red-apple',
-    'bannana',
+    'green_apple',
+    'red_apple',
+    'banana',
     'pear',
     'car',
     'tree',
@@ -122,27 +123,26 @@ const Game1 = () => {
             <div className="absolute right-0 pr-3 text-primary font-medium">
                 Trenutni niz: {currentStreak}
             </div>
-            <div className="flex justify-content-center block">
-                <h1> Koliko oblika {wantedShape} ima na ekranu?</h1>
-            </div>
-        <div className="flex justify-content-center align-content-center">
-            <div className="flex flex-wrap justify-content-center w-3">
+            <div className="container">
+                <div className="flex justify-content-center block">
+                    <h1> <span>Koliko oblika </span><Shape name={wantedShape} klasa="titleShape"/> <span>ima na ekranu?</span></h1>
+                </div>
+            <div className="flex justify-content-center align-content-center">
+                <div className="flex flex-wrap justify-content-center w-3">
 
-                {currentShapes.map((shape, index) => (
-                    <img
-                    key={index}
-                    alt={shape}
-                    />
-                    
-                ))}
+                    {currentShapes.map((shape, index) => (
+                        <Shape name={shape} key={index} klasa="shape--game1"/>
+                        
+                        ))}
+                </div>
             </div>
-        </div>
-        <div className="flex justify-content-center w-full">
-            {isDisabled ? disable : enable}
-        </div>
-        <div className="flex justify-content-center">
-            {!!isClicked ? (outcome ? success : fail) : null}        
-        </div>
+            <div className="flex justify-content-center w-full">
+                {isDisabled ? disable : enable}
+            </div>
+            <div className="flex justify-content-center">
+                {!!isClicked ? (outcome ? success : fail) : null}        
+            </div>
+            </div>
         </div>
     )
 
