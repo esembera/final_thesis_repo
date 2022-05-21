@@ -2,42 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Auth";
 import './Game2.css'
 import Picture from "./Picture";
-import equal from '../../assets/images/signs/equal.png';
-import less_than from '../../assets/images/signs/less_than.png';
-import more_than from '../../assets/images/signs/more_than.png';
 import { useDrop } from "react-dnd";
 import { Button } from "primereact/button";
 import Shape from "../Shared/Shape";
+import tekstovi from "../Shared/Text";
+import shapes from "../Shared/Shapes";
+import PictureList from "../Shared/Options";
 
 
-const shapes = [
-    'green_apple',
-    'red_apple',
-    'banana',
-    'pear',
-    'car',
-    'tree',
-    'bird',
-    'candy',
-    'chocolate',
-    'cookie'
-]
-
-
-const PictureList = [
-    {
-        id: 1,
-        src: equal
-    },
-    {
-        id: 2,
-        src: less_than
-    },
-    {
-        id: 3,
-        src: more_than
-    }
-]
 const Game2 = () => {
     
 
@@ -62,7 +34,11 @@ const Game2 = () => {
         const shapes1 = [];
         const shapes2 = [];
         const randomShape1 = shapes[Math.floor(Math.random()*shapes.length)];
-        const randomShape2 = shapes[Math.floor(Math.random()*shapes.length)];
+        const tempShape = shapes[Math.floor(Math.random()*shapes.length)];
+        while(tempShape === randomShape1){
+            tempShape = shapes[Math.floor(Math.random()*shapes.length)];
+        };
+        const randomShape2 = tempShape;
         const noShapes1 = Math.floor(Math.random() * 9 + 1);
         const noShapes2 = Math.floor(Math.random() * 9 + 1);
         setNoShapes1(noShapes1);
@@ -166,7 +142,7 @@ const Game2 = () => {
                     Trenutni niz: {currentStreak}
                 </div>
                 <div className="flex justify-content-center block">
-                    <h1> Ima li na ekranu više <Shape klasa="titleShape" name={selectedShape1}/> ili <Shape klasa="titleShape" name={selectedShape2}/> ?</h1>
+                    <h1> IMA LI NA EKRANU VIŠE {tekstovi[selectedShape1]} <Shape klasa="titleShape" name={selectedShape1}/> ILI {tekstovi[selectedShape2]} <Shape klasa="titleShape" name={selectedShape2}/> ?</h1>
                 </div>
                 <div className="grid">
                     <div className="col-5">
