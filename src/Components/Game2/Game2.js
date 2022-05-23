@@ -142,7 +142,7 @@ const Game2 = () => {
                     Trenutni niz: {currentStreak}
                 </div>
                 <div className="flex justify-content-center block">
-                    <h1> IMA LI NA EKRANU VIŠE {tekstovi[selectedShape1]} <Shape klasa="titleShape" name={selectedShape1}/> ILI {tekstovi[selectedShape2]} <Shape klasa="titleShape" name={selectedShape2}/> ?</h1>
+                    <h1> KOJI JE ODNOS {tekstovi[selectedShape1]} <Shape klasa="titleShape" name={selectedShape1}/> I {tekstovi[selectedShape2]} <Shape klasa="titleShape" name={selectedShape2}/> ?</h1>
                 </div>
                 <div className="grid">
                     <div className="col-5">
