@@ -1,15 +1,14 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../Auth";
+import React from "react";
+import { useAuth } from "../Auth";
 
 const Home = () => {
 
-    const currentUser = useContext(AuthContext);
-
+    const { currentUser } = useAuth()
 
     return (
         <div>
             <h1>Pozdrav</h1>
-            {!!currentUser ? currentUser.currentUser?.multiFactor?.user?.email : null} <br />
+            {!!currentUser ? currentUser.email : null} <br />
         </div>
     )
 

@@ -6,12 +6,12 @@ import 'primereact/resources/primereact.css'
 import {Menubar} from 'primereact/menubar'
 import { ToastContext } from './Toast'
 import { Toast } from 'primereact/toast'
-import React, {useContext, useRef} from 'react';
+import React, { useRef} from 'react';
 import Main from './Components/Main'
-import { AuthContext } from './Auth'
 import { useHistory } from "react-router-dom";
 import app from './base'
 import { Button } from 'primereact/button'
+import { useAuth } from './Auth'
 
 
 const App = () => {
@@ -71,7 +71,8 @@ const App = () => {
                 onClick={() => history.push('/')}>
                   </img>
 
-  const currentUser = useContext(AuthContext);
+  const { currentUser } = useAuth()
+
   console.log(currentUser)
 
   const login = <span>
@@ -89,7 +90,7 @@ const logout = <span className="flex flex-row">
 	  <ToastContext.Provider value={{toastRef}}>
 		<Toast ref={toastRef}/>
 		<div className="m-2">
-					<Menubar className="mb-3" model={[...menuItems]} start={start} end={!!currentUser?.currentUser ? logout : login}/>
+					<Menubar className="mb-3" model={[...menuItems]} start={start} end={!!currentUser ? logout : login}/>
 			<Main />
 		</div>
 	  </ToastContext.Provider>
