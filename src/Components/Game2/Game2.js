@@ -138,49 +138,60 @@ const Game2 = () => {
 
     return (
         <div>
-                <div className="absolute right-0 pr-3 text-primary font-medium">
-                    Trenutni niz: {currentStreak}
-                </div>
+            <div className="absolute right-0 pr-3 text-primary font-medium">
+                Trenutni niz: {currentStreak}
+            </div>
+            <div className="container">
+
                 <div className="flex justify-content-center block">
-                    <h1> KOJI JE ODNOS {tekstovi[selectedShape1]} <Shape klasa="titleShape" name={selectedShape1}/> I {tekstovi[selectedShape2]} <Shape klasa="titleShape" name={selectedShape2}/> ?</h1>
+                    <h1> KOJI JE ODNOS {tekstovi[selectedShape1]} <Shape klasa="titleShape" name={selectedShape1} type="title"/> I {tekstovi[selectedShape2]} <Shape klasa="titleShape" name={selectedShape2} type="title"/> ?</h1>
                 </div>
                 <div className="grid">
-                    <div className="col-5">
+                    <div className="col-5 right-100">
+                        <div className="flex flex-wrap justify-content-center">
 
                         {currentShapes1.map((shape, index) => (
-
-                            <Shape name={shape} key={index} klasa="shape--game2"/>
                             
-                        ))}
+                            <Shape name={shape} key={index} klasa="shape--game2" type="board"/>
+                            
+                            ))}
+                        </div>
                     </div>
 
-                    <div className="col-2 justify-content-center">
+                    <div className="col-2">
+                        <div className="flex justify-content-center">
+
                             <div className="board" ref={drop}>
                                     <Picture style={"one"} src={selectedValue?.src} id={selectedValue?.id} />
                             </div>
 
+                        </div>
 
                             <div className="pictures">
 
                                {PictureList.map((picture) => (
                                    <Picture style={"many"} src={picture.src} id={picture.id} key={picture.id}/>
-                                ))}
+                                   ))}
 
                             </div>
 
                     </div>
                     
                     <div className="col-5">
+                        <div className="flex flex-wrap justify-content-center">
+
                         {currentShapes2.map((shape, index) => (
-                                <Shape name={shape} key={index} klasa="shape--game2"/>
-                                
+                            <Shape name={shape} key={index} klasa="shape--game2" type="board"/>
+                            
                             ))}
 
+                        </div>
                     </div>
                 </div>
-                <div className="flex justify-content-center">
-                    {!!isClicked ? (outcome ? success : fail) : null}        
-                </div>
+            </div>
+            <div className="message-container">
+                {!!isClicked ? (outcome ? success : fail) : null}        
+            </div>
         </div>
     )
 

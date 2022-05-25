@@ -1,10 +1,11 @@
 import { Button } from "primereact/button";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Auth";
-import './Game1.css'
+import './Game1.css';
 import Shape from "../Shared/Shape";
 import shapes from "../Shared/Shapes";
 import tekstovi from "../Shared/Text";
+import { Card } from "primereact/card";
 
 
 const numbers = ["0",1,2,3,4,5,6,7,8,9,10]
@@ -111,25 +112,27 @@ const Game1 = () => {
             <div className="absolute right-0 pr-3 text-primary font-medium">
                 Trenutni niz: {currentStreak}
             </div>
-            <div className="container">
                 <div className="flex justify-content-center block">
-                    <h1> <span>KOLIKO {tekstovi[wantedShape]} </span><Shape name={wantedShape} klasa="titleShape"/> <span>IMA NA EKRANU?</span></h1>
+                    <Card>
+                    <h1> <span>KOLIKO {tekstovi[wantedShape]} </span><Shape name={wantedShape} klasa="titleShape" type="title"/> <span>IMA NA EKRANU?</span></h1>
+                    </Card>
                 </div>
-            <div className="flex justify-content-center align-content-center">
-                <div className="flex flex-wrap justify-content-center w-3">
+            <div className="container-game1">
+                <div className="flex justify-content-center align-content-center">
+                    <div className="flex flex-wrap justify-content-center game-container">
 
-                    {currentShapes.map((shape, index) => (
-                        <Shape name={shape} key={index} klasa="shape--game1"/>
-                        
-                        ))}
+                        {currentShapes.map((shape, index) => (
+                            <Shape name={shape} key={index} klasa="shape--game1" type="board"/>
+                            
+                            ))}
+                    </div>
+                </div>
+                <div className="flex justify-content-center w-full">
+                    {isDisabled ? disable : enable}
                 </div>
             </div>
-            <div className="flex justify-content-center w-full">
-                {isDisabled ? disable : enable}
-            </div>
-            <div className="flex justify-content-center">
+            <div className="message-container-game1">
                 {!!isClicked ? (outcome ? success : fail) : null}        
-            </div>
             </div>
         </div>
     )

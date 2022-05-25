@@ -1,20 +1,3 @@
-.app{
-    /*display: flex;*/
-    padding: 30px;
-}
-
-.game{
-    /*width: 1050px;
-    height: 1050px;*/
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.game img{
-    width: 70px;
-    height: 70px;
-}
-
 .buttonDiv{
     display: inline;
     margin: 10px;
@@ -24,10 +7,63 @@
     width: 61px;
 }
 
-.container{
+.container-game1{
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+}
+
+.message-container-game1{
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.game-container{
+    width: 30%
+}
+
+@media only screen and (max-width: 1667px){
+    .message-container-game1{
+        top: 85%
+    }
+    .game-container{
+        width: 35%
+    }
+}
+
+@media only screen and (max-width: 1430px){
+    .game-container{
+        width: 40%
+    }
+    
+}
+
+@media only screen and (max-width: 1250px){
+    .game-container{
+        width: 45%
+    }
+    .message-container-game1{
+        top: 85%
+    }
+}
+
+@media only screen and (max-width: 1200px){
+    .game-container{
+        width: 50%
+    }
+    .message-container-game1{
+        top: 85%
+    }
+}
+
+@media only screen and (max-width: 1000px){
+    .message-container-game1{
+        top: 85%;
+    }
 }
