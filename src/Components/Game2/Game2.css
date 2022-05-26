@@ -1,44 +1,43 @@
-.board{
-    border: 2px solid black;
-    width: 200px;
-    height: 100px;
-    margin: 0 auto;
-    align-items: center;
+.board {
+  border: 2px solid black;
+  width: 200px;
+  height: 100px;
+  margin: 0 auto;
+  align-items: center;
 }
 
-.pictures{
-    overflow: hidden;
-    clear: both;
-    margin: 0 auto;
+.pictures {
+  overflow: hidden;
+  clear: both;
+  margin: 0 auto;
 }
 
-.many{
-    width: 30%;
-    margin: 5px 3px; 
-    display:'inline-block';
+.many {
+  width: 30%;
+  margin: 5px 3px;
+  display: "inline-block";
 }
 
-.one{
-    width: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3px;
+.one {
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3px;
 }
 
-.container{
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+.container {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
-.message-container{
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-
+.message-container {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }

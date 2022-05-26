@@ -1,69 +1,67 @@
-.buttonDiv{
-    display: inline;
-    margin: 10px;
+.buttonDiv {
+  display: inline;
+  margin: 10px;
 }
 
-.numberButton{
-    width: 61px;
+.numberButton {
+  width: 61px;
 }
 
-.container-game1{
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+.container-game1 {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
-.message-container-game1{
-    position: absolute;
+.message-container-game1 {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.game-container {
+  width: 30%;
+}
+
+@media only screen and (max-width: 1667px) {
+  .message-container-game1 {
     top: 85%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-
+  }
+  .game-container {
+    width: 35%;
+  }
 }
 
-.game-container{
-    width: 30%
+@media only screen and (max-width: 1430px) {
+  .game-container {
+    width: 40%;
+  }
 }
 
-@media only screen and (max-width: 1667px){
-    .message-container-game1{
-        top: 85%
-    }
-    .game-container{
-        width: 35%
-    }
+@media only screen and (max-width: 1250px) {
+  .game-container {
+    width: 45%;
+  }
+  .message-container-game1 {
+    top: 85%;
+  }
 }
 
-@media only screen and (max-width: 1430px){
-    .game-container{
-        width: 40%
-    }
-    
+@media only screen and (max-width: 1200px) {
+  .game-container {
+    width: 50%;
+  }
+  .message-container-game1 {
+    top: 85%;
+  }
 }
 
-@media only screen and (max-width: 1250px){
-    .game-container{
-        width: 45%
-    }
-    .message-container-game1{
-        top: 85%
-    }
-}
-
-@media only screen and (max-width: 1200px){
-    .game-container{
-        width: 50%
-    }
-    .message-container-game1{
-        top: 85%
-    }
-}
-
-@media only screen and (max-width: 1000px){
-    .message-container-game1{
-        top: 85%;
-    }
+@media only screen and (max-width: 1000px) {
+  .message-container-game1 {
+    top: 85%;
+  }
 }

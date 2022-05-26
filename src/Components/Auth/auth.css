@@ -1,15 +1,15 @@
 .card-container {
-    max-width: 45rem;
+  max-width: 45rem;
 }
 
 .card-container .p-card-content {
-    padding-top: 2rem;
+  padding-top: 2rem;
 }
 
 .card-container .card-container {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .card-container .p-field {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
