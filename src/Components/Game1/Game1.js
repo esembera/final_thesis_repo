@@ -123,7 +123,6 @@ const Game1 = () => {
       <div className="flex justify-content-center block">
         <Card>
           <h1>
-            {" "}
             <span>KOLIKO {tekstovi[wantedShape]} </span>
             <Shape name={wantedShape} klasa="titleShape" type="title" /> <span>IMA NA EKRANU?</span>
           </h1>

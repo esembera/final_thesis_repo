@@ -8,6 +8,7 @@ import Shape from "../Shared/Shape";
 import tekstovi from "../Shared/Text";
 import shapes from "../Shared/Shapes";
 import PictureList from "../Shared/Options";
+import { Card } from "primereact/card";
 
 const Game2 = () => {
   const [currentShapes1, setCurrentShapes1] = useState([]);
@@ -29,7 +30,7 @@ const Game2 = () => {
     const shapes1 = [];
     const shapes2 = [];
     const randomShape1 = shapes[Math.floor(Math.random() * shapes.length)];
-    const tempShape = shapes[Math.floor(Math.random() * shapes.length)];
+    var tempShape = shapes[Math.floor(Math.random() * shapes.length)];
     while (tempShape === randomShape1) {
       tempShape = shapes[Math.floor(Math.random() * shapes.length)];
     }
@@ -133,12 +134,13 @@ const Game2 = () => {
     <div>
       <div className="absolute right-0 pr-3 text-primary font-medium">Trenutni niz: {currentStreak}</div>
       <div className="container">
-        <div className="flex justify-content-center block">
-          <h1>
-            {" "}
-            KOJI JE ODNOS {tekstovi[selectedShape1]} <Shape klasa="titleShape" name={selectedShape1} type="title" /> I{" "}
-            {tekstovi[selectedShape2]} <Shape klasa="titleShape" name={selectedShape2} type="title" /> ?
-          </h1>
+        <div className="flex justify-content-center block mb-8">
+          <Card>
+            <h1>
+              KOJI JE ODNOS {tekstovi[selectedShape1]} <Shape klasa="titleShape" name={selectedShape1} type="title" /> I{" "}
+              {tekstovi[selectedShape2]} <Shape klasa="titleShape" name={selectedShape2} type="title" /> ?
+            </h1>
+          </Card>
         </div>
         <div className="grid">
           <div className="col-5 right-100">
@@ -155,12 +157,6 @@ const Game2 = () => {
                 <Picture style={"one"} src={selectedValue?.src} id={selectedValue?.id} />
               </div>
             </div>
-
-            <div className="pictures">
-              {PictureList.map((picture) => (
-                <Picture style={"many"} src={picture.src} id={picture.id} key={picture.id} />
-              ))}
-            </div>
           </div>
 
           <div className="col-5">
@@ -169,6 +165,11 @@ const Game2 = () => {
                 <Shape name={shape} key={index} klasa="shape--game2" type="board" />
               ))}
             </div>
+          </div>
+          <div className="pictures">
+            {PictureList.map((picture) => (
+              <Picture style={"many"} src={picture.src} id={picture.id} key={picture.id} />
+            ))}
           </div>
         </div>
       </div>
