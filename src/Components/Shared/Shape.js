@@ -1,6 +1,6 @@
 import React from "react";
 
-import banana from "../../assets/images/shapes/banana.jpg";
+import banana from "../../assets/images/shapes/banana.png";
 import red_apple from "../../assets/images/shapes/red_apple.png";
 import green_apple from "../../assets/images/shapes/green_apple.png";
 import car from "../../assets/images/shapes/car.png";

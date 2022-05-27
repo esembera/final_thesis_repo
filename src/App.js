@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import app from "./base";
 import { Button } from "primereact/button";
 import { useAuth } from "./Auth";
+import "./App.css";
 
 const App = () => {
   const history = useHistory();
@@ -95,7 +96,7 @@ const App = () => {
   return (
     <ToastContext.Provider value={{ toastRef }}>
       <Toast ref={toastRef} />
-      <div className="m-2">
+      <div className="main m-2">
         <Menubar className="mb-3" model={[...menuItems]} start={start} end={!!currentUser ? logout : login} />
         <Main />
       </div>
