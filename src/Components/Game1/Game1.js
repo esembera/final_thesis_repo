@@ -6,6 +6,7 @@ import Shape from "../Shared/Shape";
 import shapes from "../Shared/Shapes";
 import tekstovi from "../Shared/Text";
 import { Card } from "primereact/card";
+import { useHistory } from "react-router-dom";
 
 const numbers = ["0", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -20,6 +21,8 @@ const Game1 = () => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [currentStreak, setCurrentStreak] = useState(0);
   const [refreshPage, setRefreshPage] = useState(0);
+
+  const history = useHistory();
 
   let initialNumberOfShapes = 20;
 
@@ -119,7 +122,17 @@ const Game1 = () => {
 
   return (
     <div>
-      <div className="absolute right-0 pr-3 text-primary font-medium">Trenutni niz: {currentStreak}</div>
+      <div>
+        <div className="absolute right-0 pr-3 text-primary font-medium">Trenutni niz: {currentStreak}</div>
+        <div className="absolute left-0 pl-3 text-primary font-medium">
+          <Button
+            label={"Povratak na naslovnicu"}
+            onClick={() => history.push("/")}
+            icon="pi pi-angle-left"
+            iconPos="left"
+          ></Button>
+        </div>
+      </div>
       <div className="flex justify-content-center block">
         <Card>
           <h1>

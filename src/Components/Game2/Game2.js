@@ -9,6 +9,7 @@ import tekstovi from "../Shared/Text";
 import shapes from "../Shared/Shapes";
 import PictureList from "../Shared/Options";
 import { Card } from "primereact/card";
+import { useHistory } from "react-router-dom";
 
 const Game2 = () => {
   const [currentShapes1, setCurrentShapes1] = useState([]);
@@ -25,6 +26,8 @@ const Game2 = () => {
   const [noShapes1, setNoShapes1] = useState(0);
   const [noShapes2, setNoShapes2] = useState(0);
   const [failed, setFailed] = useState(0);
+
+  const history = useHistory();
 
   const createBoard = () => {
     const shapes1 = [];
@@ -132,7 +135,17 @@ const Game2 = () => {
 
   return (
     <div>
-      <div className="absolute right-0 pr-3 text-primary font-medium">Trenutni niz: {currentStreak}</div>
+      <div>
+        <div className="absolute right-0 pr-3 text-primary font-medium">Trenutni niz: {currentStreak}</div>
+        <div className="absolute left-0 pl-3 text-primary font-medium">
+          <Button
+            label={"Povratak na naslovnicu"}
+            onClick={() => history.push("/")}
+            icon="pi pi-angle-left"
+            iconPos="left"
+          ></Button>
+        </div>
+      </div>
       <div className="container">
         <div className="flex justify-content-center block mb-8">
           <Card>
