@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import app from "../../../base";
 import { useHistory } from "react-router-dom";
 import { Password } from "primereact/password";
@@ -9,11 +9,14 @@ import { classNames } from "primereact/utils";
 import { Button } from "primereact/button";
 import "primeflex/primeflex.css";
 import "../auth.css";
+import { ToastContext } from "../../../Toast";
 
 const Login = () => {
   const history = useHistory();
 
   const [loading, setLoading] = useState(false);
+
+  const { toastRef } = useContext(ToastContext);
 
   const onLogin = (data) => {
     setLoading(true);
@@ -27,7 +30,27 @@ const Login = () => {
         },
         (error) => {
           setLoading(false);
-          alert(error);
+          if (error.code === "auth/wrong-password") {
+            toastRef.current.show({
+              severity: "error",
+              summary: "Pogrešni podaci",
+              detail: "Upisali ste pogrešnu zaporku ili traženi korisnik nema zaporku",
+            });
+          }
+          if (error.code === "auth/user-not-found") {
+            toastRef.current.show({
+              severity: "error",
+              summary: "Nepostojeći korisnik",
+              detail: "Upisali ste e-mail korisnika koji ne postoji",
+            });
+          }
+          if (error.code === "auth/too-many-requests") {
+            toastRef.current.show({
+              severity: "error",
+              summary: "Previše neuspjelih prijava",
+              detail: "Vaš račun je privremeno blokiran zbog previše neuspjelih prijava",
+            });
+          }
         }
       );
   };

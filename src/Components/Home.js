@@ -4,11 +4,15 @@ import usporedba from "../assets/images/thumbnails/usporedba.png";
 import zbrajanje from "../assets/images/thumbnails/zbrajanje.png";
 import brojanje from "../assets/images/thumbnails/brojanje.png";
 import { useHistory } from "react-router-dom";
+import DeviceDetect from "./Shared/DeviceDetect";
+import { useState, useEffect } from "react";
 
 const Home = () => {
   const footer = <h3 className="text-center">Svoje znanje možeš vježbati na jednoj od dolje ponuđenih igara:</h3>;
 
   const history = useHistory();
+
+  const [deviceType, setDeviceType] = useState("");
 
   return (
     <div>

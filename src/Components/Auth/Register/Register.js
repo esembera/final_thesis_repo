@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import app from "../../../base";
 import { useHistory } from "react-router-dom";
 import { Password } from "primereact/password";
@@ -9,9 +9,12 @@ import { classNames } from "primereact/utils";
 import { Button } from "primereact/button";
 import "primeflex/primeflex.css";
 import "../auth.css";
+import { ToastContext } from "../../../Toast";
 
 const Register = () => {
   const history = useHistory();
+
+  const { toastRef } = useContext(ToastContext);
 
   const [loading, setLoading] = useState(false);
   const onSignUp = (data) => {
@@ -26,7 +29,20 @@ const Register = () => {
         },
         (error) => {
           setLoading(false);
-          alert(error);
+          if (error.code === "auth/weak-password") {
+            toastRef.current.show({
+              severity: "error",
+              summary: "Slaba zaporka",
+              detail: "Lozinka treba imati barem 6 znakova",
+            });
+          }
+          if (error.code === "auth/email-already-in-use") {
+            toastRef.current.show({
+              severity: "error",
+              summary: "E-mail se već koristi",
+              detail: "Upisana e-mail adresa se već koristi od strane drugog računa",
+            });
+          }
         }
       );
   };

@@ -74,8 +74,6 @@ const App = () => {
 
   const { currentUser } = useAuth();
 
-  console.log(currentUser);
-
   const login = (
     <span>
       <Button
