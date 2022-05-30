@@ -9,12 +9,15 @@ import shapes from "../Shared/Shapes";
 import PictureList from "../Shared/Options";
 import { Card } from "primereact/card";
 import { useHistory } from "react-router-dom";
+import operations from "../Shared/Operations";
+import "./Game3.css";
+import equal from "../../assets/images/signs/equal-2.png";
+import ShapesList from "../Shared/ShapesList";
 
 const Game3 = () => {
   const [currentShapes1, setCurrentShapes1] = useState([]);
   const [currentShapes2, setCurrentShapes2] = useState([]);
-  const [selectedShape1, setSelectedShape1] = useState("");
-  const [selectedShape2, setSelectedShape2] = useState("");
+  const [selectedShape1, setSelectedShape1] = useState();
   const [selectedValue, setSelectedValue] = useState([]);
   const [selectedId, setSelectedId] = useState(0);
   const [outcome, setOutcome] = useState(null);
@@ -25,30 +28,41 @@ const Game3 = () => {
   const [noShapes1, setNoShapes1] = useState(0);
   const [noShapes2, setNoShapes2] = useState(0);
   const [failed, setFailed] = useState(0);
+  const [operation, setOperation] = useState("");
 
   const history = useHistory();
 
   const createBoard = () => {
     const shapes1 = [];
     const shapes2 = [];
-    const randomShape1 = shapes[Math.floor(Math.random() * shapes.length)];
-    var tempShape = shapes[Math.floor(Math.random() * shapes.length)];
-    while (tempShape === randomShape1) {
-      tempShape = shapes[Math.floor(Math.random() * shapes.length)];
+    const randomShape1 = ShapesList[Math.floor(Math.random() * ShapesList.length)];
+    console.log(randomShape1.id);
+    const randomOperation = operations[Math.floor(Math.random() * operations.length)];
+    setOperation(randomOperation);
+    var noShapes1 = 0;
+    var noShapes2 = 0;
+    if (randomOperation.value === "minus") {
+      noShapes1 = Math.floor(Math.random() * 9 + 1);
+      noShapes2 = Math.floor(Math.random() * 9 + 1);
+      while (noShapes2 >= noShapes1) {
+        noShapes2 = Math.floor(Math.random() * 9 + 1);
+      }
+      setNoShapes1(noShapes1);
+      setNoShapes2(noShapes2);
     }
-    const randomShape2 = tempShape;
-    const noShapes1 = Math.floor(Math.random() * 9 + 1);
-    const noShapes2 = Math.floor(Math.random() * 9 + 1);
-    setNoShapes1(noShapes1);
-    setNoShapes2(noShapes2);
+    if (randomOperation.value === "plus") {
+      noShapes1 = Math.floor(Math.random() * 5 + 1);
+      noShapes2 = Math.floor(Math.random() * 5 + 1);
+      setNoShapes1(noShapes1);
+      setNoShapes2(noShapes2);
+    }
     for (let i = 0; i < noShapes1; i++) {
       shapes1.push(randomShape1);
     }
     for (let i = 0; i < noShapes2; i++) {
-      shapes2.push(randomShape2);
+      shapes2.push(randomShape1);
     }
     setSelectedShape1(randomShape1);
-    setSelectedShape2(randomShape2);
     setCurrentShapes1(shapes1);
     setCurrentShapes2(shapes2);
   };
@@ -62,8 +76,9 @@ const Game3 = () => {
   }));
 
   const addImageToBoard = (id) => {
-    const pictureList = PictureList.filter((picture) => id === picture.id);
-    setSelectedValue(pictureList[0]);
+    console.log(id);
+    const pictureList = ShapesList.filter((picture) => id === picture.id);
+    setSelectedValue((selectedValue) => [...selectedValue, pictureList[0]]);
     setSelectedId(id);
   };
 
@@ -149,43 +164,58 @@ const Game3 = () => {
         <div className="flex justify-content-center block mb-8">
           <Card>
             <h1>
-              KOJI JE ODNOS {tekstovi[selectedShape1]} <Shape klasa="titleShape" name={selectedShape1} type="title" /> I{" "}
-              {tekstovi[selectedShape2]} <Shape klasa="titleShape" name={selectedShape2} type="title" /> ?
+              {tekstovi[operation.value]} {tekstovi[selectedShape1?.name]}{" "}
+              <Shape klasa="titleShape" name={selectedShape1?.name} type="title" />
             </h1>
           </Card>
         </div>
         <div className="grid">
-          <div className="col-5 right-100">
+          <div className="col-3 right-100">
             <div className="flex flex-wrap justify-content-center">
               {currentShapes1.map((shape, index) => (
-                <Shape name={shape} key={index} klasa="shape--game2" type="board" />
+                <Shape name={shape.name} key={index} klasa="shape--game2" type="board" />
               ))}
             </div>
           </div>
 
-          <div className="col-2">
+          <div className="col-1">
+            <div className="flex justify-content-center">
+              <img className="operationPicture" src={operation.src} id={operation?.id} />
+            </div>
+          </div>
+
+          <div className="col-3">
+            <div className="flex flex-wrap justify-content-center">
+              {currentShapes2.map((shape, index) => (
+                <Shape name={shape.name} key={index} klasa="shape--game2" type="board" />
+              ))}
+            </div>
+          </div>
+
+          <div className="col-1">
+            <div className="flex justify-content-center">
+              <img className="operationPictureEqual" src={equal} />
+            </div>
+          </div>
+
+          <div className="col-4">
             <div className="flex justify-content-center">
               <div className="board" ref={drop}>
-                <Picture style={"one"} src={selectedValue?.src} id={selectedValue?.id} />
+                {selectedValue.map((value) => (
+                  <Picture style={"one"} src={value?.src} id={value?.id} />
+                ))}
               </div>
             </div>
           </div>
 
-          <div className="col-5">
-            <div className="flex flex-wrap justify-content-center">
-              {currentShapes2.map((shape, index) => (
-                <Shape name={shape} key={index} klasa="shape--game2" type="board" />
-              ))}
+          {selectedShape1 && (
+            <div className="pictures">
+              <Picture name={selectedShape1.name} src={selectedShape1.src} id={selectedShape1.id} style={"many"} />
             </div>
-          </div>
-          <div className="pictures">
-            {PictureList.map((picture) => (
-              <Picture style={"many"} src={picture.src} id={picture.id} key={picture.id} />
-            ))}
-          </div>
+          )}
         </div>
       </div>
-      <div className="message-container">{!!isClicked ? (outcome ? success : fail) : null}</div>
+      {/* <div className="message-container">{!!isClicked ? (outcome ? success : fail) : null}</div> */}
     </div>
   );
 };

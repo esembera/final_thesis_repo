@@ -9,6 +9,8 @@ const tekstovi = {
   candy: "BOMBONA",
   chocolate: "ČOKOLADICA",
   cookie: "KEKSIĆA",
+  plus: "KOLIKI JE ZBROJ",
+  minus: "KOLIKA JE RAZLIKA",
 };
 
 export default tekstovi;

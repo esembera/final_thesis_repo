@@ -118,8 +118,6 @@ const Game1 = () => {
     </div>
   ));
 
-  console.log(isDisabled);
-
   return (
     <div>
       <div>
