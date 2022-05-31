@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import app from "../../../base";
 import { useHistory } from "react-router-dom";
 import { Password } from "primereact/password";

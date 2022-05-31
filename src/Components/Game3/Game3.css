@@ -2,3 +2,77 @@
   width: 70%;
   margin-top: 12px;
 }
+.board--game3 {
+  border: 2px solid black;
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
+  align-items: center;
+}
+.gumbic {
+  padding-top: 8rem;
+  padding-right: 15rem;
+}
+
+@media only screen and (max-width: 1800px) {
+  .gumbic {
+    padding-right: 11rem;
+  }
+}
+
+@media only screen and (max-width: 1550px) {
+  .gumbic {
+    padding-right: 10rem;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .gumbic {
+    padding-right: 9rem;
+  }
+}
+
+@media only screen and (max-width: 1260px) {
+  .gumbic {
+    padding-right: 7rem;
+  }
+}
+
+.container--game3 {
+  width: 99%;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.message-container--game3-succes {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+.message-container--game3-fail {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+@media only screen and (max-height: 850px) {
+  .container--game3 {
+    top: 50%;
+  }
+  .gumbic {
+    padding-top: 8rem;
+  }
+  .message-container--game3-succes {
+    top: 80%;
+  }
+  .message-container--game3-fail {
+    top: 90%;
+  }
+}

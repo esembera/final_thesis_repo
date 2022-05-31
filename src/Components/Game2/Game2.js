@@ -10,6 +10,7 @@ import shapes from "../Shared/Shapes";
 import PictureList from "../Shared/Options";
 import { Card } from "primereact/card";
 import { useHistory } from "react-router-dom";
+import { ToastContext } from "../../Toast";
 
 const Game2 = () => {
   const [currentShapes1, setCurrentShapes1] = useState([]);
@@ -28,6 +29,7 @@ const Game2 = () => {
   const [failed, setFailed] = useState(0);
 
   const history = useHistory();
+  const { toastRef } = useContext(ToastContext);
 
   const createBoard = () => {
     const shapes1 = [];
@@ -133,13 +135,31 @@ const Game2 = () => {
   );
   const fail = <h1>Nažalost krivo, pokušaj ponovo!</h1>;
 
+  const footer = (
+    <span className="flex justify-content-center">
+      <Button
+        icon="pi pi-question"
+        onClick={() =>
+          toastRef.current.show({
+            severity: "info",
+            summary: "Informacije",
+            detail: "Privucite željeni oblik u ocrtano područje.",
+          })
+        }
+      />
+    </span>
+  );
+
   return (
     <div>
       <div>
-        <div className="absolute right-0 pr-3 text-primary font-medium">Trenutni niz: {currentStreak}</div>
+        <div className="absolute right-0 pr-3 text-primary font-medium">
+          {footer}Trenutni niz: {currentStreak}
+        </div>
         <div className="absolute left-0 pl-3 text-primary font-medium">
           <Button
             label={"Povratak na naslovnicu"}
+            style={{ zIndex: "1" }}
             onClick={() => history.push("/")}
             icon="pi pi-angle-left"
             iconPos="left"

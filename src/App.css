@@ -55,3 +55,7 @@ body {
   right: 0;
   background-color: #8b5cf6;
 }
+
+ul.p-menubar-root-list {
+  z-index: 2;
+}

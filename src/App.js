@@ -95,7 +95,13 @@ const App = () => {
     <ToastContext.Provider value={{ toastRef }}>
       <Toast ref={toastRef} />
       <div className="main m-2">
-        <Menubar className="mb-3" model={[...menuItems]} start={start} end={!!currentUser ? logout : login} />
+        <Menubar
+          className="mb-3"
+          model={[...menuItems]}
+          start={start}
+          end={!!currentUser ? logout : login}
+          style={{ zIndex: "2" }}
+        />
         <Main />
       </div>
     </ToastContext.Provider>
