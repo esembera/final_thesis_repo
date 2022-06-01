@@ -4,11 +4,10 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { AuthProvider } from "./Auth";
+import { AuthProvider } from "./Auth/Auth";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import Footer from "./Components/Shared/Footer";
-import { TouchBackend } from "react-dnd-touch-backend";
+import Footer from "./Components/Shared/Statics/Footer";
 
 ReactDOM.render(
   <AuthProvider>

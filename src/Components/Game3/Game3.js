@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Auth";
-import Picture from "../Game2/Picture";
+import { AuthContext } from "../../Auth/Auth";
+import Picture from "../Shared/Picture";
 import { useDrop } from "react-dnd";
 import { Button } from "primereact/button";
 import Shape from "../Shared/Shape";
-import tekstovi from "../Shared/Text";
+import tekstovi from "../Shared/Interfaces/Text";
 import { Card } from "primereact/card";
 import { useHistory } from "react-router-dom";
-import operations from "../Shared/Operations";
+import operations from "../Shared/Interfaces/Operations";
 import "./Game3.css";
 import equal from "../../assets/images/signs/equal-2.png";
-import ShapesList from "../Shared/ShapesList";
-import { ToastContext } from "../../Toast";
+import ShapesList from "../Shared/Interfaces/ShapesList";
+import { ToastContext } from "../Shared/Toast";
 
 const Game3 = () => {
   const [currentShapes1, setCurrentShapes1] = useState([]);

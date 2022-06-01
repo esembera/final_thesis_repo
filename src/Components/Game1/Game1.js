@@ -1,10 +1,10 @@
 import { Button } from "primereact/button";
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Auth";
+import { AuthContext } from "../../Auth/Auth";
 import "./Game1.css";
 import Shape from "../Shared/Shape";
-import shapes from "../Shared/Shapes";
-import tekstovi from "../Shared/Text";
+import shapes from "../Shared/Interfaces/Shapes";
+import tekstovi from "../Shared/Interfaces/Text";
 import { Card } from "primereact/card";
 import { useHistory } from "react-router-dom";
 

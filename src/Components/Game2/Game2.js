@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Auth";
+import { AuthContext } from "../../Auth/Auth";
 import "./Game2.css";
-import Picture from "./Picture";
+import Picture from "../Shared/Picture";
 import { useDrop } from "react-dnd";
 import { Button } from "primereact/button";
 import Shape from "../Shared/Shape";
-import tekstovi from "../Shared/Text";
-import shapes from "../Shared/Shapes";
-import PictureList from "../Shared/Options";
+import tekstovi from "../Shared/Interfaces/Text";
+import shapes from "../Shared/Interfaces/Shapes";
+import PictureList from "../Shared/Interfaces/Options";
 import { Card } from "primereact/card";
 import { useHistory } from "react-router-dom";
-import { ToastContext } from "../../Toast";
+import { ToastContext } from "../Shared/Toast";
 
 const Game2 = () => {
   const [currentShapes1, setCurrentShapes1] = useState([]);

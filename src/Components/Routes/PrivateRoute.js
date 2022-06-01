@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { Redirect, Route } from "react-router-dom";
-import { AuthContext } from "../../Auth";
-import { ToastContext } from "../../Toast";
+import { AuthContext } from "../../Auth/Auth";
+import { ToastContext } from "../Shared/Toast";
 
 const PrivateRoute = ({ requireAdmin, component: Component, ...rest }) => {
   const { currentUser } = useContext(AuthContext);

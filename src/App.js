@@ -4,14 +4,14 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/lara-light-purple/theme.css";
 import "primereact/resources/primereact.css";
 import { Menubar } from "primereact/menubar";
-import { ToastContext } from "./Toast";
+import { ToastContext } from "./Components/Shared/Toast";
 import { Toast } from "primereact/toast";
 import React, { useRef } from "react";
 import Main from "./Components/Main";
 import { useHistory } from "react-router-dom";
-import app from "./base";
+import app from "./Auth/base";
 import { Button } from "primereact/button";
-import { useAuth } from "./Auth";
+import { useAuth } from "./Auth/Auth";
 import "./App.css";
 
 const App = () => {

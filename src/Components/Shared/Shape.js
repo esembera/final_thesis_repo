@@ -1,6 +1,6 @@
 import React from "react";
 import "./Shape.css";
-import ShapesList from "./ShapesList";
+import ShapesList from "./Interfaces/ShapesList";
 
 function Shape({ name, klasa, type }) {
   const picture = ShapesList.filter((shape) => {

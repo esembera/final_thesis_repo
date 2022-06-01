@@ -1,5 +1,5 @@
-import plus from "../../assets/images/signs/+.png";
-import minus from "../../assets/images/signs/-.png";
+import plus from "../../../assets/images/signs/+.png";
+import minus from "../../../assets/images/signs/-.png";
 
 const operations = [
   {

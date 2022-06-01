@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import app from "../../../base";
+import app from "../../../Auth/base";
 import { useHistory } from "react-router-dom";
 import { Password } from "primereact/password";
 import { Controller, useForm } from "react-hook-form";
@@ -9,7 +9,7 @@ import { classNames } from "primereact/utils";
 import { Button } from "primereact/button";
 import "primeflex/primeflex.css";
 import "../auth.css";
-import { ToastContext } from "../../../Toast";
+import { ToastContext } from "../../Shared/Toast";
 
 const Register = () => {
   const history = useHistory();
