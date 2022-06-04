@@ -27,12 +27,6 @@
   width: 30%;
 }
 
-@media only screen and (max-height: 810px) {
-  .game-container {
-    width: 25%;
-  }
-}
-
 @media only screen and (max-width: 1667px) {
   .message-container-game1 {
     top: 85%;
@@ -69,5 +63,11 @@
 @media only screen and (max-width: 1000px) {
   .message-container-game1 {
     top: 85%;
+  }
+}
+
+@media only screen and (max-height: 810px) and (max-width: 1250px) {
+  .game-container {
+    width: 30%;
   }
 }
