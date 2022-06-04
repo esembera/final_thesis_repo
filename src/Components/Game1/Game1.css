@@ -66,8 +66,18 @@
   }
 }
 
-@media only screen and (max-height: 810px) and (max-width: 1250px) {
+@media only screen and (max-height: 810px) and (max-width: 1920px) {
+  .game-container {
+    width: 25%;
+  }
+}
+@media only screen and (max-height: 810px) and (max-width: 1400px) {
   .game-container {
     width: 30%;
+  }
+}
+@media only screen and (max-height: 810px) and (max-width: 1200px) {
+  .game-container {
+    width: 35%;
   }
 }
