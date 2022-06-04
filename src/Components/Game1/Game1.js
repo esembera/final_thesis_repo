@@ -7,8 +7,9 @@ import shapes from "../Shared/Interfaces/Shapes";
 import tekstovi from "../Shared/Interfaces/Text";
 import { Card } from "primereact/card";
 import { useHistory } from "react-router-dom";
+import { scryRenderedDOMComponentsWithClass } from "react-dom/test-utils";
 
-const numbers = ["0", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const Game1 = () => {
   const [currentShapes, setCurrentShapes] = useState([]);
@@ -46,16 +47,12 @@ const Game1 = () => {
 
     setCurrentShapes(randomShapes);
     setCurrentNoShapes(noShapes);
-  };
-
-  const randomShapeYoureLookingFor = () => {
-    const shapeYoureLookingFor = shapes[Math.floor(Math.random() * shapes.length)];
+    const shapeYoureLookingFor = randomShapes[Math.floor(Math.random() * randomShapes.length)];
     setWantedShape(shapeYoureLookingFor);
   };
 
   useEffect(() => {
     createBoard();
-    randomShapeYoureLookingFor();
     const streak = JSON.parse(localStorage.getItem(`${currentUser.currentUser?.multiFactor?.user?.email}:game1Streak`));
     if (streak) {
       setCurrentStreak(streak);
@@ -77,10 +74,7 @@ const Game1 = () => {
   const verifyChoice = () => {
     if (timesRendered >= 1) {
       setIsClicked(true);
-      if (
-        selectedValue === currentNoShapes[wantedShape] ||
-        (selectedValue === "0" && currentNoShapes[wantedShape] === undefined)
-      ) {
+      if (selectedValue === currentNoShapes[wantedShape]) {
         setOutcome(true);
         setIsDisabled(true);
         setCurrentStreak(currentStreak + 1);
@@ -107,14 +101,14 @@ const Game1 = () => {
   );
   const fail = <h1>NAŽALOST KRIVO, POKUŠAJ PONOVO!</h1>;
 
-  const enable = numbers.map((number) => (
+  const enable = numbers.map((number, index) => (
     <div className="buttonDiv">
-      <Button className="numberButton" label={number} onClick={() => setSelectedValue(number)} />
+      <Button className="numberButton" label={number} key={index} onClick={() => setSelectedValue(number)} />
     </div>
   ));
-  const disable = numbers.map((number) => (
+  const disable = numbers.map((number, index) => (
     <div className="buttonDiv">
-      <Button className="numberButton" label={number} disable />
+      <Button className="numberButton" label={number} key={index} disable />
     </div>
   ));
 
