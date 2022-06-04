@@ -6,6 +6,12 @@
   width: 100px;
 }
 
+@media only screen and (max-height: 810px) {
+  .shape--game1 {
+    width: 70px;
+  }
+}
+
 .shape--game2 {
   width: 90px;
 }

@@ -27,6 +27,12 @@
   width: 30%;
 }
 
+@media only screen and (max-height: 810px) {
+  .game-container {
+    width: 25%;
+  }
+}
+
 @media only screen and (max-width: 1667px) {
   .message-container-game1 {
     top: 85%;

@@ -19,32 +19,41 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const onSignUp = (data) => {
     setLoading(true);
-    app
-      .auth()
-      .createUserWithEmailAndPassword(data.email, data.password)
-      .then(
-        () => {
-          history.push("/");
-          setLoading(false);
-        },
-        (error) => {
-          setLoading(false);
-          if (error.code === "auth/weak-password") {
-            toastRef.current.show({
-              severity: "error",
-              summary: "Slaba zaporka",
-              detail: "Lozinka treba imati barem 6 znakova",
-            });
+    if (data.password !== data.repeatedPassword) {
+      setLoading(false);
+      toastRef.current.show({
+        severity: "error",
+        summary: "Krivo upisana zaporka",
+        detail: "Zaporka i ponovljena zaporka nisu iste",
+      });
+    } else {
+      app
+        .auth()
+        .createUserWithEmailAndPassword(data.email, data.password)
+        .then(
+          () => {
+            history.push("/");
+            setLoading(false);
+          },
+          (error) => {
+            setLoading(false);
+            if (error.code === "auth/weak-password") {
+              toastRef.current.show({
+                severity: "error",
+                summary: "Slaba zaporka",
+                detail: "Lozinka treba imati barem 6 znakova",
+              });
+            }
+            if (error.code === "auth/email-already-in-use") {
+              toastRef.current.show({
+                severity: "error",
+                summary: "E-mail se već koristi",
+                detail: "Upisana e-mail adresa se već koristi od strane drugog računa",
+              });
+            }
           }
-          if (error.code === "auth/email-already-in-use") {
-            toastRef.current.show({
-              severity: "error",
-              summary: "E-mail se već koristi",
-              detail: "Upisana e-mail adresa se već koristi od strane drugog računa",
-            });
-          }
-        }
-      );
+        );
+    }
   };
 
   const defaultValues = {
@@ -109,6 +118,28 @@ const Register = () => {
               </label>
             </span>
             {getFormErrorMessage("password")}
+          </div>
+
+          <div className="p-field col-12">
+            <span className="p-float-label mt-2">
+              <Controller
+                name="repeatedPassword"
+                control={control}
+                rules={{ required: "Ponovljena zaporka je obavezna." }}
+                render={({ field, fieldState }) => (
+                  <Password
+                    id={field.name}
+                    {...field}
+                    toggleMask
+                    className={classNames({ "p-invalid": fieldState.invalid })}
+                  />
+                )}
+              />
+              <label htmlFor="repeatedPassword" className={classNames({ "p-error": errors.repeatedPassword })}>
+                Ponovi zaporku*
+              </label>
+            </span>
+            {getFormErrorMessage("repeatedPassword")}
           </div>
 
           <div className="col-12 flex justify-content-center">
