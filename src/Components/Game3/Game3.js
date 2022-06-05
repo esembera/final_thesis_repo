@@ -137,7 +137,8 @@ const Game3 = () => {
           toastRef.current.show({
             severity: "info",
             summary: "Informacije",
-            detail: "Privucite oblik u ocrtano područje onoliko puta koliko želite da iznosi vaše riješenje.",
+            detail:
+              "Privucite oblik u ocrtano područje onoliko puta koliko želite da iznosi vaše riješenje i zatim pritisnite na gumb provjeri rezultat.",
           })
         }
       />
@@ -168,8 +169,9 @@ const Game3 = () => {
         <div className="flex justify-content-center block mb-5">
           <Card>
             <h1>
-              {tekstovi[operation.value]} {tekstovi[selectedShape1?.name]}{" "}
-              <Shape klasa="titleShape" name={selectedShape1?.name} type="title" />
+              {tekstovi[operation.value]} {tekstovi[selectedShape1?.name]}
+              {""}
+              <Shape klasa="titleShape" name={selectedShape1?.name} type="title" />?
             </h1>
           </Card>
         </div>
