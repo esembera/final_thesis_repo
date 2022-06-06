@@ -139,6 +139,7 @@ const Game2 = () => {
     <span className="flex justify-content-center">
       <Button
         icon="pi pi-question"
+        style={{zIndex: '1'}}
         onClick={() =>
           toastRef.current.show({
             severity: "info",
