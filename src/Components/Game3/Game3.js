@@ -122,11 +122,11 @@ const Game3 = () => {
 
   const success = (
     <div className="">
-      <h1 className="text-center">Bravo!</h1>
+      <h1 className="text-center">BRAVO! &#128516; </h1>
       <Button label="Klikni me kada si spreman za novi krug!" onClick={() => refreshPageAndSaveProgress()} />
     </div>
   );
-  const fail = <h1 style={{ top: "90%" }}>Nažalost krivo, pokušaj ponovo!</h1>;
+  const fail = <h1 style={{ top: "90%" }}>NAŽALOST KRIVO, POKUŠAJ PONOVO! &#128546;</h1>;
 
   const footer = (
     <span className="flex justify-content-center">

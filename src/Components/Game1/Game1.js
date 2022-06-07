@@ -95,11 +95,11 @@ const Game1 = () => {
 
   const success = (
     <div className="">
-      <h1 className="text-center">BRAVO!</h1>
+      <h1 className="text-center">BRAVO! &#128516; </h1>
       <Button label="Klikni me kada si spreman za novi krug!" onClick={() => refreshPageAndSaveProgress()} />
     </div>
   );
-  const fail = <h1>NAŽALOST KRIVO, POKUŠAJ PONOVO!</h1>;
+  const fail = <h1>NAŽALOST KRIVO, POKUŠAJ PONOVO! &#128546; </h1>;
 
   const enable = numbers.map((number, index) => (
     <div className="buttonDiv">
