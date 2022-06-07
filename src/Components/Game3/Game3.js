@@ -132,7 +132,7 @@ const Game3 = () => {
     <span className="flex justify-content-center">
       <Button
         icon="pi pi-question"
-        style={{ marginTop: "5px" }}
+        style={{ marginTop: "5px", zIndex: '1' }}
         onClick={() =>
           toastRef.current.show({
             severity: "info",
